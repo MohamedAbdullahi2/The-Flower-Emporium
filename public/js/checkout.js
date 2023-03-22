@@ -1,78 +1,27 @@
+// require('dotenv').config();
 
+const checkoutButton = document.getElementById('checkout-btn');
 
-const price =document.querySelector('.price').innerHTML.split(':')[1]
-const name =document.querySelector('.product-name').innerHTML
-const quantity = document.querySelector('.quantity-input').value
-
-// const price =document.querySelector('.price')
-
-// console.log(quantity)
-
-const buttonCheckout = document.querySelector("#checkout-btn")
- console.log(buttonCheckout)
-
-buttonCheckout.addEventListener('click',(e)=>{
-  e.preventDefault();
-  
-  console.log("hello")
-
-  fetch("/checkout/create-session", {
-    method: "POST",
-    // mode: "no-cors",
-  
+checkoutButton.addEventListener('click', async () => {
+  const response = await fetch('/create-checkout-session', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json'
     },
-    // Send along all the information about the items
     body: JSON.stringify({
-      items: [
-        {
-          id: 1,
-          name: name,
-          price: parseInt(price),
-          quantity: quantity,
-        }
-    
-      ],
-    })}).then(res => {
-      if (res.ok) return res.json()
+      productId: 't-shirt',
+      quantity: 1,
+    }),
+  });
 
-      // window.location.href= res.url
-      // If there is an error then make sure we catch that
-      // return res.json().then(e => Promise.reject(e))
-    }).then(({ url }) => {
-      // console.log(url)
-      // On success redirect the customer to the returned URL
-      window.location =  url
+  const session = await response.json();
 
-    
-    })
+  const stripe = Stripe('YOUR_STRIPE_PRIVATE_KEY');
+  const result = await stripe.redirectToCheckout({
+    sessionId: session.id,
+  });
 
-    
-    // .catch(e => {
-    //   console.error(e.error)
-    // })
- 
+  if (result.error) {
+    console.error(result.error.message);
+  }
 });
-      
-    
-  //   // mode: 'opaque',
-  //   mode: 'no-cors'
-
-    
-  // }).then(res => {
-  //     if (res.ok) return res.json()
-
-  //     window.location.href= res.url
-  //     // If there is an error then make sure we catch that
-  //     // return res.json().then(e => Promise.reject(e))
-  //   })
-  //   // .then(({ url }) => {
-  //   //   // On success redirect the customer to the returned URL
-  //   //   window.location.href= '/checkout'
-  //   // })
-  //   .catch(e => {
-  //     console.error(e.error)
-  //   })
-  // });
-
