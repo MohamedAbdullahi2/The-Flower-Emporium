@@ -6,8 +6,8 @@
         <img class="product-img" src="../images/{{product.filename}}" alt="product.filename">
 
         <div class="product-details" data-product-name="{{product.name}}" data-product-quantity="{{item.quantities}}" data-product-price="{{item.product.price}}">
-        <h2 class="product-name">{{product.name}}</h2>
-        <p class="price">price: {{item.product.price}}$</p>
+        <h2>{{product.name}}</h2>
+        <p>price: {{item.product.price}}$</p>
         <p>{{item.product.description}}</p>
         <p>stock: {{item.product.stock}}</p>
         <label for="quantity">Quantity:</label>
@@ -28,15 +28,5 @@
 
 {{/if}}
 
-{{!-- <img class="product-img" src="/images/{{product.filename}}" alt="product.filename"> --}}
 
-{{!-- <div class="product-details">
-    <h2>{{product.name}}</h2>
-    <p class="price">Price: {{product.price}}$</p>
-    <p>{{product.description}}</p> --}}
-   
-</div>
-{{!-- 
- <button id="checkout" class="checkoutbtn">checkout</button> --}}
-
-<script src="../js/checkout.js"></script>
+<script src="../js/cart.js"></script>

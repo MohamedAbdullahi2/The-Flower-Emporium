@@ -61,9 +61,9 @@ checkoutBtn.addEventListener('click', async () => {
         body.push(obj);
     })
     console.log(body);
-    // const response = await fetch(`/api/productCart/checkout`, {
-    //     method: 'delete',
-    //     body: JSON.stringify(body),
-    //     headers: {'Content-Type': 'application/json'},
-    // })
+    const response = await fetch(`/api/productCart/checkout`, {
+        method: 'delete',
+        body: JSON.stringify(body),
+        headers: {'Content-Type': 'application/json'},
+    })
 })
